@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Set main lang to English for clarity, though UI is Arabic -->
+<html lang="en"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecture قراءة - استماع وقراءة</title> 
+    <title>Lecture - استماع وقراءة</title> 
     <style>
         @font-face { 
-            font-family: 'CursiveStandardFont'; /* Define your font family name */
-            src: url('Cursivestandard.ttf') format('truetype'); /* Path to your font file */
-            /* You can add font-weight and font-style if needed */
+            font-family: 'CursiveStandardFont'; 
+            src: url('Cursivestandard.ttf') format('truetype'); 
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -30,16 +29,16 @@
         .mode-select-button.active { background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%) !important; box-shadow: inset 0 3px 7px rgba(0,0,0,0.2), 0 6px 15px rgba(0,0,0,0.2); transform: translateY(1px); }
         
         #listenModeUI .reader-select-group { margin-bottom: 15px; text-align: left; } 
-        #listenModeUI label { font-size: 1em; margin-bottom: 5px; display: block; color: #555; font-family: 'Arial', sans-serif; /* Ensure UI text uses default font */ }
+        #listenModeUI label { font-size: 1em; margin-bottom: 5px; display: block; color: #555; font-family: 'Arial', sans-serif; }
         #listenModeUI select { font-size: 1em; padding: 10px; width:100%; border-radius: 8px; border: 1px solid #ddd; background-color: white; }
         
-        .preroll-title-display { text-align: center; margin-bottom: 10px; padding-bottom: 10px; font-size: 1.1em; color: #444; font-family: 'CursiveStandardFont', Arial, sans-serif; /* Apply new font to preroll title */ }
+        .preroll-title-display { text-align: center; margin-bottom: 10px; padding-bottom: 10px; font-size: 1.1em; color: #444; font-family: 'CursiveStandardFont', Arial, sans-serif; }
         .preroll-words-container { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(102, 126, 234, 0.2); }
 
         #sentence { 
-            font-family: 'CursiveStandardFont', Arial, sans-serif; /* APPLY NEW FONT HERE */
-            font-size: 32px; /* Adjust size for cursive font if needed */
-            line-height: 2.2; /* Adjust line-height for cursive font */
+            font-family: 'CursiveStandardFont', Arial, sans-serif; 
+            font-size: 32px; 
+            line-height: 2.2; 
             text-align: left; 
         } 
 
@@ -47,12 +46,11 @@
         #sentence .preroll-words-container .word-container > .word-span {
             display: inline-block; padding: 2px 4px; margin: 0 1px; border-radius: 5px; 
             vertical-align: baseline; transition: all 0.2s ease-in-out; cursor: default; visibility: hidden;
-            /* font-family will be inherited from #sentence or .preroll-title-display */
         }
 
         .word-container { position: relative; display: inline-block; margin: 0 2px; padding-top: 1.5em; padding-bottom: 0.5em; vertical-align: baseline; }
         
-        .pronunciation-feedback { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 0.8em; /* Adjusted */ line-height: 1; visibility: hidden; font-family: Arial, sans-serif; z-index: 10; }
+        .pronunciation-feedback { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 0.8em; line-height: 1; visibility: hidden; font-family: Arial, sans-serif; z-index: 10; }
         .pronunciation-feedback.correct { color: green; visibility: visible; }
         .pronunciation-feedback.incorrect { color: red; visibility: visible; }
 
@@ -66,7 +64,7 @@
         .skip-word-button:hover { color: #e67e00; border-color: #e67e00; }
 
         .section-marker { 
-            font-family: 'CursiveStandardFont', Arial, sans-serif; /* Apply new font to section markers too if desired */
+            font-family: 'CursiveStandardFont', Arial, sans-serif; 
             color: #667eea; font-size: 0.75em; margin: 0 5px; display: inline; visibility: visible !important; 
         } 
 
@@ -107,15 +105,27 @@
             text-decoration: line-through; transform: none; box-shadow: none; opacity: 0.7;
         }
 
-        .controls { margin-top: 15px; margin-bottom: 10px; display: flex; justify-content: center; gap:15px; }
-        .controls button { font-family: 'Arial', sans-serif; /* Ensure Arabic UI buttons use Arial */ border: none; padding: 12px 22px; border-radius: 50px; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); min-width: 140px; text-align:center; color: white; }
-        #listenControls button, #readControls button:not(#resetButtonRead) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .controls { margin-top: 15px; margin-bottom: 10px; display: flex; flex-wrap: wrap; /* Allow wrapping */ justify-content: center; gap:10px; /* Reduced gap slightly */ }
+        .controls button { font-family: 'Arial', sans-serif; border: none; padding: 10px 18px; /* Adjusted padding */ border-radius: 50px; font-size: 1.1em; /* Adjusted font size */ font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); min-width: 100px; /* Adjusted min-width */ text-align:center; color: white; margin-bottom: 5px; /* Add margin for wrapped items */ }
+        
+        #readControls .nav-button { /* Specific class for nav buttons if needed */
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%) !important; /* Lighter blue for nav */
+            color: #333 !important;
+        }
+        #readControls .nav-button:disabled {
+            background: #ccc !important;
+            color: #777 !important;
+            cursor: not-allowed;
+        }
+
+
+        #listenControls button, #readControls button:not(#resetButtonRead):not(.nav-button) { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         #readControls #resetButtonRead { background: linear-gradient(135deg, #868e96 0%, #595f65 100%); }
-        .controls button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .controls button:active { transform: translateY(0px); }
+        .controls button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .controls button:active:not(:disabled) { transform: translateY(0px); }
         #readControls #speechButtonRead.listening { background: linear-gradient(135deg, #ff6b6b 0%, #f06595 100%) !important; animation: none !important; }
         #listenControls #playPauseButtonListen { font-size: 1.3em; padding: 10px 20px; }
-        #speechStatusRead { font-family: 'Arial', sans-serif; /* Ensure Arabic status uses Arial */ font-size: 1.2em; color: #000000; background: rgba(255, 255, 255, 0.7); padding: 12px 20px; border-radius: 25px; min-height: 2.5em; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; line-height: 1.4; text-align: center; }
+        #speechStatusRead { font-family: 'Arial', sans-serif; font-size: 1.2em; color: #000000; background: rgba(255, 255, 255, 0.7); padding: 12px 20px; border-radius: 25px; min-height: 2.5em; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; line-height: 1.4; text-align: center; }
         #audioPlayerListen { display: none; }
         
         #skippedWordsDisplay { 
@@ -128,7 +138,7 @@
             font-size: 1.1em; color: #d9534f; margin-bottom: 8px;
             text-align: center; font-family: 'Arial', sans-serif;
         }
-        #skippedWordsDisplay ul { list-style-type: none; padding-right: 0; max-height: 150px; overflow-y: auto; text-align:left; /* LTR list items */ font-family: 'CursiveStandardFont', Arial, sans-serif; /* Font for skipped words list */ }
+        #skippedWordsDisplay ul { list-style-type: none; padding-right: 0; max-height: 150px; overflow-y: auto; text-align:left; font-family: 'CursiveStandardFont', Arial, sans-serif; }
         #skippedWordsDisplay li { padding: 3px 0; font-size: 1em; border-bottom: 1px dashed #eee; }
         #skippedWordsDisplay li:last-child { border-bottom: none; }
 
@@ -136,13 +146,13 @@
         @keyframes confetti-fall { 0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotateZ(720deg); opacity: 0; } }
         .btn-pulsing { animation: pulse-glow-red 1.5s infinite alternate; }
         @keyframes pulse-glow-red { 0% { box-shadow: 0 6px 20px rgba(0,0,0,0.15), 0 0 0 0px rgba(255,0,0,0.7); } 100% { box-shadow: 0 6px 25px rgba(0,0,0,0.25), 0 0 0 12px rgba(255,0,0,0); } }
-        @media (max-width: 768px) { body { padding: 15px; } .page-content-wrapper { padding: 0; } h1.page-title { font-size: 2em; margin-bottom: 20px; } #modeSelector, #listenModeUI, #readModeUI, #sentence { padding: 15px; border-radius:12px; } #modeSelector { flex-direction: column; gap: 10px; padding: 20px; } .mode-select-button { font-size: 1.1em; padding: 12px 20px; width: 100%; max-width: 280px; margin: 0 auto; } .controls button { font-size: 1.1em; padding: 10px 18px; min-width: 120px; } #listenControls #playPauseButtonListen { font-size: 1.2em; } #sentence { font-size: 28px; line-height: 2.0; } .section-marker { font-size: 0.7em; } #speechStatusRead {font-size: 1.1em;} #skippedWordsDisplay { padding: 10px; } #skippedWordsDisplay h3 {font-size: 1em;} #skippedWordsDisplay li {font-size: 0.9em;} }
-        @media (max-width: 480px) { body { padding: 10px; } h1.page-title { font-size: 1.7em; } #modeSelector, #listenModeUI, #readModeUI, #sentence { padding: 12px; border-radius:10px;} .mode-select-button { font-size: 1em; padding: 10px 15px; } .controls button { font-size: 1em; padding: 8px 15px; min-width: auto; } #listenControls #playPauseButtonListen { font-size: 1.1em; } #sentence { font-size: 24px; line-height: 1.9; } .section-marker { font-size: 0.65em; } #speechStatusRead { font-size: 1em; padding: 10px 15px; } #skippedWordsDisplay { padding: 8px; } #skippedWordsDisplay h3 {font-size: 0.95em;} #skippedWordsDisplay li {font-size: 0.85em;} }
+        @media (max-width: 768px) { body { padding: 15px; } .page-content-wrapper { padding: 0; } h1.page-title { font-size: 2em; margin-bottom: 20px; } #modeSelector, #listenModeUI, #readModeUI, #sentence { padding: 15px; border-radius:12px; } #modeSelector { flex-direction: column; gap: 10px; padding: 20px; } .mode-select-button { font-size: 1.1em; padding: 12px 20px; width: 100%; max-width: 280px; margin: 0 auto; } .controls button { font-size: 1.0em; padding: 10px 15px; min-width: 90px; } #listenControls #playPauseButtonListen { font-size: 1.2em; } #sentence { font-size: 28px; line-height: 2.0; } .section-marker { font-size: 0.7em; } #speechStatusRead {font-size: 1.1em;} #skippedWordsDisplay { padding: 10px; } #skippedWordsDisplay h3 {font-size: 1em;} #skippedWordsDisplay li {font-size: 0.9em;} }
+        @media (max-width: 480px) { body { padding: 10px; } h1.page-title { font-size: 1.7em; } #modeSelector, #listenModeUI, #readModeUI, #sentence { padding: 12px; border-radius:10px;} .mode-select-button { font-size: 1em; padding: 10px 15px; } .controls button { font-size: 0.9em; padding: 8px 12px; min-width: 80px; } #listenControls #playPauseButtonListen { font-size: 1.1em; } #sentence { font-size: 24px; line-height: 1.9; } .section-marker { font-size: 0.65em; } #speechStatusRead { font-size: 1em; padding: 10px 15px; } #skippedWordsDisplay { padding: 8px; } #skippedWordsDisplay h3 {font-size: 0.95em;} #skippedWordsDisplay li {font-size: 0.85em;} }
     </style>
 </head>
 <body>
  <div class="page-content-wrapper">
-    <h1 class="page-title">Lecture قراءة</h1> 
+    <h1 class="page-title">Lecture</h1> 
     <div id="modeSelector">
         <button id="btnSelectListen" class="mode-select-button">🎵 اسمع</button>
         <button id="btnSelectRead" class="mode-select-button">📖 اقرأ</button>
@@ -155,7 +165,9 @@
     <div id="readModeUI" style="display: none;">
         <div id="speechStatusRead">اضغط "ابدأ القراءة" واقرأ</div>
         <div class="controls" id="readControls">
+            <button id="readPrevWordButton" class="nav-button">⬅️ السابق</button> <!-- NEW PREVIOUS BUTTON -->
             <button id="speechButtonRead" class="btn-pulsing">🎤 ابدأ القراءة</button>
+            <button id="readNextWordButton" class="nav-button">التالي ➡️</button> <!-- NEW NEXT BUTTON -->
             <button id="resetButtonRead">🔄 إعادة</button>
         </div>
     </div>
@@ -167,7 +179,7 @@
     {
         "name": "Default English Reader",
         "audioFile": "farid.mp3",
-        "prerollTitle": "farid",
+        "prerollTitle": "Farid",
         "prerollTimings": [],
         "ayatTimings": [
             {
@@ -492,6 +504,9 @@
     const read_speechButton = document.getElementById("speechButtonRead");
     const read_speechStatus = document.getElementById("speechStatusRead");
     const read_resetButton = document.getElementById("resetButtonRead");
+    const read_prevWordButton = document.getElementById("readPrevWordButton"); // NEW
+    const read_nextWordButton = document.getElementById("readNextWordButton"); // NEW
+
     let read_currentWordIndex = 0, read_isRecognizing = false, read_accumulatedFinalTranscript = "";
     let read_shouldRestart = false, read_restartTimeout, read_silenceTimeout, read_recognition;
 
@@ -533,6 +548,52 @@
         }
     }
     
+    function read_updateNavButtons() { // NEW: To enable/disable Prev/Next buttons
+        read_prevWordButton.disabled = (read_currentWordIndex <= 0);
+        read_nextWordButton.disabled = (read_currentWordIndex >= read_wordSpans.length - 1);
+    }
+
+    function read_highlightCurrentWord() { // NEW: Helper to highlight and manage current word state
+        read_wordSpans.forEach((span, index) => {
+            span.classList.remove('highlight-active-word', 'incorrect-pronunciation'); // Remove these from all
+            const skipBtn = span.parentElement.querySelector('.skip-word-button');
+            if (skipBtn) skipBtn.style.visibility = 'hidden';
+            // Keep .correct-pronunciation and .skipped-word as they are historical
+        });
+
+        if (read_currentWordIndex < read_wordSpans.length) {
+            const currentSpan = read_wordSpans[read_currentWordIndex];
+            if (currentSpan && !currentSpan.classList.contains('skipped-word') && !currentSpan.classList.contains('correct-pronunciation')) {
+                currentSpan.classList.add('highlight-active-word');
+                const feedbackEl = currentSpan.parentElement.querySelector('.pronunciation-feedback');
+                if (feedbackEl) { feedbackEl.textContent = ''; feedbackEl.className = 'pronunciation-feedback'; }
+            }
+            // If speech is active and user navigates, we might want to restart it for the new word
+            if (read_isRecognizing && read_shouldRestart) {
+                read_recognition.stop(); // This will trigger onend, which might restart
+            }
+        }
+        read_updateNavButtons();
+    }
+
+
+    function read_goToNextWord() { // NEW
+        if (read_currentWordIndex < read_wordSpans.length - 1) {
+            read_currentWordIndex++;
+            read_highlightCurrentWord();
+            read_speechStatus.textContent = "انتقلت للكلمة التالية. اقرأ الآن...";
+        }
+    }
+
+    function read_goToPreviousWord() { // NEW
+        if (read_currentWordIndex > 0) {
+            read_currentWordIndex--;
+            read_highlightCurrentWord();
+            read_speechStatus.textContent = "رجعت للكلمة السابقة. اقرأ الآن...";
+        }
+    }
+
+
     function read_skipCurrentWord(wordSpanToSkip) {
         if (!wordSpanToSkip || read_currentWordIndex >= read_wordSpans.length) return;
 
@@ -555,17 +616,7 @@
 
         if (read_currentWordIndex < read_wordSpans.length) {
             read_speechStatus.textContent = "تم التخطي. الكلمة التالية..."; 
-            const nextWordSpan = read_wordSpans[read_currentWordIndex];
-            if (nextWordSpan) {
-                nextWordSpan.classList.add('highlight-active-word');
-                const nextFeedbackEl = nextWordSpan.parentElement.querySelector('.pronunciation-feedback');
-                if (nextFeedbackEl) { nextFeedbackEl.textContent = ''; nextFeedbackEl.className = 'pronunciation-feedback';}
-                const nextSkipBtn = nextWordSpan.parentElement.querySelector('.skip-word-button');
-                if (nextSkipBtn) { nextSkipBtn.style.visibility = 'hidden'; } 
-            }
-             if (read_isRecognizing) { 
-                read_recognition.stop(); 
-            }
+            read_highlightCurrentWord(); // Use helper
         } else {
             read_speechStatus.textContent = "🎉 أحسنت! لقد أكملت النص (مع بعض التجاوزات). 🎉"; 
             triggerConfettiEffect(); 
@@ -573,6 +624,7 @@
             if (read_isRecognizing) read_recognition.stop();
             else read_updateUIForStopped(); 
             read_speechButton.classList.remove('btn-pulsing');
+            read_updateNavButtons(); // Update nav buttons at end
         }
     }
 
@@ -585,7 +637,7 @@
         
         read_recognition.onstart = () => { read_isRecognizing = true; read_accumulatedFinalTranscript = ""; read_speechButton.textContent = "🔴 جاري القراءة..."; read_speechButton.classList.add('listening'); read_speechButton.classList.remove('btn-pulsing'); read_speechStatus.textContent = "اقرأ الآن..."; if (read_restartTimeout) clearTimeout(read_restartTimeout); if (read_silenceTimeout) clearTimeout(read_silenceTimeout); read_restartTimeout = null; read_silenceTimeout = null; };
         read_recognition.onend = () => { read_isRecognizing = false; if (read_restartTimeout) clearTimeout(read_restartTimeout); if (read_silenceTimeout) clearTimeout(read_silenceTimeout); read_restartTimeout = null; read_silenceTimeout = null; if (read_shouldRestart && read_currentWordIndex < read_wordSpans.length) { read_restartTimeout = setTimeout(() => { if (!read_isRecognizing && read_shouldRestart && read_currentWordIndex < read_wordSpans.length) { try { read_recognition.start(); } catch (e) { read_shouldRestart = false; read_updateUIForStopped(); } } }, 100); } else { read_updateUIForStopped(); } };
-        function read_updateUIForStopped() { read_speechButton.textContent = "🎤 ابدأ القراءة"; read_speechButton.classList.remove('listening'); if (read_currentWordIndex < read_wordSpans.length) { read_speechButton.classList.add('btn-pulsing'); } else { read_speechButton.classList.remove('btn-pulsing'); } if (read_currentWordIndex < read_wordSpans.length && read_currentWordIndex > 0) { read_speechStatus.textContent = "توقفت القراءة. اضغط لمتابعة."; } else if (read_currentWordIndex === 0) { read_speechStatus.textContent = 'اضغط "ابدأ القراءة" واقرأ'; } else if (read_currentWordIndex >= read_wordSpans.length) { /* Message set by onresult or skip */ } }
+        function read_updateUIForStopped() { read_speechButton.textContent = "🎤 ابدأ القراءة"; read_speechButton.classList.remove('listening'); if (read_currentWordIndex < read_wordSpans.length) { read_speechButton.classList.add('btn-pulsing'); } else { read_speechButton.classList.remove('btn-pulsing'); } if (read_currentWordIndex < read_wordSpans.length && read_currentWordIndex > 0) { read_speechStatus.textContent = "توقفت القراءة. اضغط لمتابعة."; } else if (read_currentWordIndex === 0) { read_speechStatus.textContent = 'اضغط "ابدأ القراءة" واقرأ'; } else if (read_currentWordIndex >= read_wordSpans.length) { /* Message set by onresult or skip */ } read_updateNavButtons(); }
         read_recognition.onerror = (event) => { let errorMsg = "خطأ في التعرف: " + event.error; if (event.error === 'aborted' && read_shouldRestart) return; if (event.error === 'no-speech' && read_shouldRestart && read_currentWordIndex < read_wordSpans.length) { return; } if (!read_shouldRestart || (event.error !== 'no-speech' && event.error !== 'aborted')) { read_speechStatus.textContent = errorMsg; read_isRecognizing = false; read_updateUIForStopped(); } };
         
         read_recognition.onresult = (event) => { 
@@ -618,14 +670,7 @@
                         read_currentWordIndex++;
                         if (read_currentWordIndex < read_wordSpans.length) {
                             read_speechStatus.textContent = "ممتاز! الكلمة التالية..."; 
-                            const nextWordSpan = read_wordSpans[read_currentWordIndex];
-                            if (nextWordSpan) {
-                                nextWordSpan.classList.add('highlight-active-word');
-                                const nextFeedbackEl = nextWordSpan.parentElement.querySelector('.pronunciation-feedback');
-                                if (nextFeedbackEl) { nextFeedbackEl.textContent = ''; nextFeedbackEl.className = 'pronunciation-feedback';}
-                                const nextSkipBtn = nextWordSpan.parentElement.querySelector('.skip-word-button'); 
-                                if (nextSkipBtn) { nextSkipBtn.style.visibility = 'hidden'; }
-                            }
+                           read_highlightCurrentWord(); // Use helper
                         }
                     } else if (targetWordText) { // INCORRECT
                         if (feedbackEl) { feedbackEl.textContent = '❌'; feedbackEl.className = 'pronunciation-feedback incorrect';}
@@ -644,7 +689,8 @@
                     read_shouldRestart = false; 
                     if (read_isRecognizing) read_recognition.stop(); else read_updateUIForStopped(); 
                     read_speechButton.classList.remove('btn-pulsing'); 
-                } 
+                }
+                read_updateNavButtons(); // Update after each result processing
             } 
         };
     }
@@ -659,16 +705,7 @@
             read_shouldRestart = true; 
             read_speechButton.classList.remove('btn-pulsing');
             try { 
-                if (read_currentWordIndex < read_wordSpans.length) { 
-                    const currentTargetSpan = read_wordSpans[read_currentWordIndex]; 
-                    if (currentTargetSpan && !currentTargetSpan.classList.contains('processed-word') && !currentTargetSpan.classList.contains('highlight-active-word') && !currentTargetSpan.classList.contains('skipped-word')) { 
-                        currentTargetSpan.classList.add('highlight-active-word'); 
-                        const feedbackEl = currentTargetSpan.parentElement.querySelector('.pronunciation-feedback');
-                        if (feedbackEl) { feedbackEl.textContent = ''; feedbackEl.className = 'pronunciation-feedback';}
-                        const skipBtn = currentTargetSpan.parentElement.querySelector('.skip-word-button');
-                        if (skipBtn) { skipBtn.style.visibility = 'hidden'; } 
-                    } 
-                } 
+                read_highlightCurrentWord(); // Ensure current word is highlighted before starting
                 read_recognition.start(); 
             } catch (e) { read_shouldRestart = false; read_isRecognizing = false; read_updateUIForStopped(); } 
         } 
@@ -689,16 +726,7 @@
         const prerollTitleDisp = sentenceContainerShared.querySelector('.preroll-title-display');
         if(prerollTitleDisp) prerollTitleDisp.style.visibility = 'visible';
         
-        if (read_wordSpans.length > 0) { 
-            const firstWord = read_wordSpans[0]; 
-            if (firstWord) { 
-                firstWord.classList.add('highlight-active-word'); 
-                const feedbackEl = firstWord.parentElement.querySelector('.pronunciation-feedback');
-                if (feedbackEl) { feedbackEl.textContent = ''; feedbackEl.className = 'pronunciation-feedback';}
-                const skipBtn = firstWord.parentElement.querySelector('.skip-word-button'); 
-                if (skipBtn) { skipBtn.style.visibility = 'hidden'; } 
-            } 
-        } 
+        read_highlightCurrentWord(); // Use helper to set initial highlight
         read_speechStatus.textContent = 'اضغط "ابدأ القراءة" واقرأ'; 
         if (read_isRecognizing) read_recognition.stop(); else read_updateUIForStopped();
     }
@@ -717,7 +745,7 @@
             read_wordSpans = []; 
         } 
 
-        if (!SpeechRecognitionAPI) { read_speechButton.disabled = true; read_speechButton.textContent = "غير مدعوم"; read_resetButton.disabled = true; read_speechStatus.textContent = "التعرف الصوتي غير مدعوم."; return; }  
+        if (!SpeechRecognitionAPI) { read_speechButton.disabled = true; read_speechButton.textContent = "غير مدعوم"; read_resetButton.disabled = true; read_speechStatus.textContent = "التعرف الصوتي غير مدعوم."; read_prevWordButton.disabled = true; read_nextWordButton.disabled = true; return; }  
         else { read_speechButton.disabled = false; read_resetButton.disabled = false; } 
         
         read_wordSpans.forEach(span => { 
@@ -727,6 +755,8 @@
         read_resetActivity(); 
         read_speechButton.onclick = read_toggleSpeechRecognition; 
         read_resetButton.onclick = read_resetActivity; 
+        read_prevWordButton.onclick = read_goToPreviousWord; // NEW
+        read_nextWordButton.onclick = read_goToNextWord;   // NEW
     }
     function deactivateReadMode() { 
         if (SpeechRecognitionAPI && read_recognition && read_isRecognizing) { read_shouldRestart = false; read_recognition.stop(); } 
@@ -737,6 +767,8 @@
         const allTextSpans = sentenceContainerShared.querySelectorAll('.word-container > .word-span, .preroll-title-display');
         allTextSpans.forEach(span => span.style.visibility = 'hidden');
         read_speechButton.onclick = null; read_resetButton.onclick = null; 
+        read_prevWordButton.onclick = null; // NEW
+        read_nextWordButton.onclick = null;  // NEW
         read_speechButton.classList.remove('btn-pulsing'); 
     }
 
